@@ -14,6 +14,7 @@
  */
 package fr.neatmonster.nocheatplus.compat.bukkit;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -21,6 +22,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import fr.neatmonster.nocheatplus.utilities.map.BlockCache;
+
+import java.util.logging.Level;
 
 public class BlockCacheBukkit extends BlockCache {
 
@@ -48,6 +51,7 @@ public class BlockCacheBukkit extends BlockCache {
     public Material fetchTypeId(final int x, final int y, final int z) {
         // TODO: consider setting type id and data at once.
         if (x > MAX_WORLD_RADIUS || x < -MAX_WORLD_RADIUS || z > MAX_WORLD_RADIUS || z < -MAX_WORLD_RADIUS) {
+            Bukkit.getLogger().log(Level.WARNING, "[NoCheatPlus] Large fetchTypeId call! " + x + "/" + z);
             return Material.AIR;
         }
         return world.getBlockAt(x, y, z).getType();
@@ -58,6 +62,7 @@ public class BlockCacheBukkit extends BlockCache {
     public int fetchData(final int x, final int y, final int z) {
         // TODO: consider setting type id and data at once.
         if (x > MAX_WORLD_RADIUS || x < -MAX_WORLD_RADIUS || z > MAX_WORLD_RADIUS || z < -MAX_WORLD_RADIUS) {
+            Bukkit.getLogger().log(Level.WARNING, "[NoCheatPlus] Large fetchData call! " + x + "/" + z);
             return 0;
         }
         return world.getBlockAt(x, y, z).getData();
