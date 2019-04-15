@@ -24,6 +24,8 @@ import fr.neatmonster.nocheatplus.utilities.map.BlockCache;
 
 public class BlockCacheBukkit extends BlockCache {
 
+    private static final int MAX_WORLD_RADIUS = 30000000;
+
     protected World world;
 
     /** Temporary use. Use LocUtil.clone before passing on. Call setWorld(null) after use. */
@@ -45,6 +47,9 @@ public class BlockCacheBukkit extends BlockCache {
     @Override
     public Material fetchTypeId(final int x, final int y, final int z) {
         // TODO: consider setting type id and data at once.
+        if (x > MAX_WORLD_RADIUS || x < -MAX_WORLD_RADIUS || z > MAX_WORLD_RADIUS || z < -MAX_WORLD_RADIUS) {
+            return Material.AIR;
+        }
         return world.getBlockAt(x, y, z).getType();
     }
 
@@ -52,6 +57,9 @@ public class BlockCacheBukkit extends BlockCache {
     @Override
     public int fetchData(final int x, final int y, final int z) {
         // TODO: consider setting type id and data at once.
+        if (x > MAX_WORLD_RADIUS || x < -MAX_WORLD_RADIUS || z > MAX_WORLD_RADIUS || z < -MAX_WORLD_RADIUS) {
+            return 0;
+        }
         return world.getBlockAt(x, y, z).getData();
     }
 
