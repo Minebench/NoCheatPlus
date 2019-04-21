@@ -21,6 +21,7 @@ import org.bukkit.Material;
 
 import fr.neatmonster.nocheatplus.compat.BridgeMaterial;
 import fr.neatmonster.nocheatplus.compat.blocks.init.BlockInit;
+import fr.neatmonster.nocheatplus.compat.bukkit.model.BukkitChorusPlant;
 import fr.neatmonster.nocheatplus.compat.bukkit.model.BukkitCocoa;
 import fr.neatmonster.nocheatplus.compat.bukkit.model.BukkitDirectionalCentered;
 import fr.neatmonster.nocheatplus.compat.bukkit.model.BukkitDoor;
@@ -50,6 +51,7 @@ public class MCAccessBukkitModern extends MCAccessBukkit {
     private static final BukkitShapeModel MODEL_GATE = new BukkitGate(
             0.375, 1.5);
     private static final BukkitShapeModel MODEL_SHULKER_BOX = new BukkitShulkerBox();
+    private static final BukkitShapeModel MODEL_CHORUS_PLANT = new BukkitChorusPlant();
 
     // Blocks with different heights based on whatever.
     private static final BukkitShapeModel MODEL_END_PORTAL_FRAME = new BukkitEndPortalFrame();
@@ -148,7 +150,13 @@ public class MCAccessBukkitModern extends MCAccessBukkit {
         BlockProperties.setBlockFlags(Material.CAULDRON, 
                 BlockFlags.SOLID_GROUND | BlockProperties.F_GROUND_HEIGHT 
                 | BlockProperties.F_MIN_HEIGHT4_1);
-        BlockProperties.setBlockFlags(Material.COCOA, BlockFlags.SOLID_GROUND | BlockProperties.F_XZ100);
+        BlockProperties.setBlockFlags(Material.COCOA, BlockFlags.SOLID_GROUND | BlockProperties.F_XZ100 | BlockProperties.F_IGN_PASSABLE);
+        BlockProperties.setBlockFlags(Material.CHORUS_PLANT, BlockFlags.SOLID_GROUND | BlockProperties.F_XZ100 | BlockProperties.F_IGN_PASSABLE);
+        // For some odd reason, adding the flags to MaterialUtil.HEADS_WALL does not apply the flag. Adding the flags one by one here solves the issue.
+        BlockProperties.setBlockFlags(Material.CREEPER_WALL_HEAD, BlockFlags.SOLID_GROUND | BlockProperties.F_XZ100 | BlockProperties.F_IGN_PASSABLE);
+        BlockProperties.setBlockFlags(Material.ZOMBIE_WALL_HEAD, BlockFlags.SOLID_GROUND | BlockProperties.F_XZ100 | BlockProperties.F_IGN_PASSABLE);
+        BlockProperties.setBlockFlags(Material.PLAYER_WALL_HEAD, BlockFlags.SOLID_GROUND | BlockProperties.F_XZ100 | BlockProperties.F_IGN_PASSABLE);
+        BlockProperties.setBlockFlags(Material.DRAGON_WALL_HEAD, BlockFlags.SOLID_GROUND | BlockProperties.F_XZ100 | BlockProperties.F_IGN_PASSABLE);
 
         // Directly keep blocks as is.
         for (final Material mat : new Material[] {
@@ -291,6 +299,13 @@ public class MCAccessBukkitModern extends MCAccessBukkit {
         // Trapdoors.
         for (final Material mat : MaterialUtil.ALL_TRAP_DOORS) {
             addModel(mat, MODEL_TRAP_DOOR);
+        }
+        
+        // Chorus Plant.
+        for (Material mat : new Material[] {
+        		Material.CHORUS_PLANT
+        }) {
+        	addModel(mat, MODEL_CHORUS_PLANT);
         }
 
         // Sort to processed by flags.
