@@ -623,7 +623,7 @@ public class DefaultConfig extends ConfigFile {
         final String start = "[player] failed [check]: ";
         final String end = ". VL [violations].";
         final String tell = "ncp tell [player] ";
-        set(ConfPaths.STRINGS + ".angle", start + "tried to hit multiple entities at the same time" + end, 785);
+        set(ConfPaths.STRINGS + ".angle", start + "tried to hit multiple entities at the same time (Tags [tags])" + end, 785);
         set(ConfPaths.STRINGS + ".attackfrequency", start + "attacks with too high a frequency ([packets]/[limit], [tags])" + end, 785);
         set(ConfPaths.STRINGS + ".ban", "ban [player]", 785);
         set(ConfPaths.STRINGS + ".ban-ip", "ban-ip [ip]", 785);
@@ -638,6 +638,7 @@ public class DefaultConfig extends ConfigFile {
         set(ConfPaths.STRINGS + ".bwrong", start + "broke another block than clicked" + end, 785);
         set(ConfPaths.STRINGS + ".captcha", "[player] failed captcha repeatedly" + end, 785);
         set(ConfPaths.STRINGS + ".chatnormal", start + "potentially annoying chat" + end, 785);
+        set(ConfPaths.STRINGS + ".clickpat", start + " seems to be clicking with bot-like frequencies" + end, 785);
         set(ConfPaths.STRINGS + ".color", start + "sent colored chat message" + end, 785);
         set(ConfPaths.STRINGS + ".commands", start + "issued too many commands" + end, 785);
         set(ConfPaths.STRINGS + ".critical", start + "tried to do a critical hit but wasn't technically jumping [tags]" + end, 785);
@@ -663,7 +664,7 @@ public class DefaultConfig extends ConfigFile {
         set(ConfPaths.STRINGS + ".improbable", start + "meets the improbable more than expected" + end, 785);
         set(ConfPaths.STRINGS + ".instantbow", start + "fires bow too fast" + end, 785);
         set(ConfPaths.STRINGS + ".instanteat", start + "eats food [food] too fast" + end, 785);
-        set(ConfPaths.STRINGS + ".inventorymove", start + "interacted with inventory while it was not possible" + end, 1153);
+        set(ConfPaths.STRINGS + ".inventorymove", start + "interacted with inventory while it was not possible (tags [tags])" + end, 1153);
         set(ConfPaths.STRINGS + ".keepalive", start + "spams keep-alive packets (god/freecam?)" + end, 785);
         set(ConfPaths.STRINGS + ".kick", "kick [player]", 785);
         set(ConfPaths.STRINGS + ".kickalive", "ncp kick [player] Too many keep-alive packets.", 785);
@@ -721,92 +722,6 @@ public class DefaultConfig extends ConfigFile {
                 )) {
             set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + name, "default+ign_passable+ground_height", 785);
         }
-        for (final String woodtype : Arrays.asList(
-                "OAK",
-                "SPRUCE",
-                "BIRCH",
-                "JUNGLE",
-                "ACACIA",
-                "DARK_OAK"
-                )) { 
-            set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + woodtype + "_FENCE", "HEIGHT150+THICK_FENCE+VARIABLE+ground", 1154);
-            set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "NETHER_BRICK_FENCE", "HEIGHT150+THICK_FENCE+VARIABLE+ground", 1154);
-            set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + woodtype + "_FENCE_GATE", "PASSABLE_X4+VARIABLE_USE+HEIGHT150+THICK_FENCE+VARIABLE+ground", 1154);
-            set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + woodtype + "_DOOR", "PASSABLE_X4+VARIABLE_USE+ground", 1154);
-            set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "IRON_DOOR", "PASSABLE_X4+VARIABLE_USE+ground", 1154);
-            set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + woodtype + "_SLAB", "default+GROUND+XZ100+ground_height", 1154);
-            set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + woodtype + "_TRAPDOOR", "default+ign_passable+ground_height", 1154);
-            set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "IRON_TRAPDOOR", "default+ign_passable+ground_height", 1154);
-        } for (final String colors : Arrays.asList(
-                "WHITE",
-                "BLUE",
-                "RED",
-                "MAGENTA",
-                "LIME",
-                "YELLOW",
-                "PINK",
-                "GRAY", 
-                "BROWN",
-                "GREEN",
-                "LIGHT_BLUE",
-                "CYAN",
-                "PURPLE",
-                "BLACK",
-                "LIGHT_GRAY",
-                "ORANGE"
-                )) { 
-        	set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + colors + "_BED", "default+ground_height", 1154);
-        	set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + colors + "_STAINED_GLASS_PANE", "THIN_FENCE+VARIABLE+ground_height+ground", 1154);
-        	set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + colors + "_SHULKER_BOX", "default+HEIGHT150+ground", 1154);
-        } for (final String headType : Arrays.asList(
-                "ZOMBIE",
-                "PLAYER",
-                "CREEPER",
-                "DRAGON"
-                )) { 
-        	set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + headType + "_HEAD", "solid+ground_height+ground+ground+ign_passable", 1154);
-        	set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "SKELETON_SKULL", "solid+ground_height+ground+ground+ign_passable", 1154);
-        	set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "WITHER_SKELETON_WALL_SKULL", "solid+ground_height+ground+ground+ign_passable", 1154);
-        	set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + headType + "_WALL_HEAD", "solid+ground_height+ground+ground+ign_passable", 1154);
-        } for (final String slabType : Arrays.asList(
-                "STONE",
-                "SANDSTONE",
-                "PETRIFIED_OAK",
-                "COBBLESTONE",
-                "BRICK",
-                "STONE_BRICK",
-                "NETHER_BRICK",
-                "QUARTZ",
-                "RED_SANDSTONE",
-                "PURPUR",
-                "PRISMARINE",
-                "PRISMARINE_BRICK",
-                "DARK_PRISMARINE"
-                )) { 
-        	set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + slabType + "_SLAB", "default+GROUND+XZ100+ground_height", 1154);
-        }
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "MAGMA_BLOCK", "default+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "LILY_PAD", "default+ign_passable+ground_height", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "END_ROD", "default+ign_passable", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "IRON_BARS", "THIN_FENCE+VARIABLE+ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "GLASS_PANE", "THIN_FENCE+VARIABLE+ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "COBBLESTONE_WALL", "HEIGHT150+VARIABLE+THICK_FENCE+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "MOSSY_COBBLESTONE_WALL", "HEIGHT150+VARIABLE+THICK_FENCE+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "ANVIL", "default+ground_height", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "DAMAGED_ANVIL", "default+ground_height", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "CHIPPED_ANVIL", "default+ground_height", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "GRASS_PATH", "default+ground_height", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "SHULKER_BOX", "default+HEIGHT150+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "CHEST", "ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "TRAPPED_CHEST", "ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "ENDER_CHEST", "ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "FARMLAND", "default+height100+ground_height+min_height16_15", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "TURTLE_EGG", "ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "SEA_PICKLE", "default+ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "CAULDRON", "ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "CONDUIT", "ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "FLOWER_POT", "ground_height+ground", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "ENCHANTING_TABLE", "ground_height+ground", 1154);
         for (final String DeadCoralType : Arrays.asList(
                 "DEAD_TUBE",
                 "DEAD_BRAIN",
@@ -820,12 +735,6 @@ public class DefaultConfig extends ConfigFile {
         set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "DEAD_TUBE_CORAL_FAN", "default+ign_passable+ground_height", 1154);
         set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "DEAD_BRAIN_CORAL_FAN", "default+ign_passable+ground_height", 1154);
         set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "DEAD_BUBBLE_CORAL_FAN", "default+ign_passable+ground_height", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "DAYLIGHT_DETECTOR", "default+GROUND+XZ100+ground_height", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "BLUE_ICE", "default+ground_height+allow_lowjump+ice", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "END_PORTAL_FRAME", "default+ign_passable+ground_height+ALLOW_LOWJUMP", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "COCOA", "default+ign_passable+ground_height+ALLOW_LOWJUMP", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "REPEATER", "default+ign_passable+ground_height+ALLOW_LOWJUMP", 1154);
-        set(ConfPaths.COMPATIBILITY_BLOCKS + ConfPaths.SUB_OVERRIDEFLAGS + "." + "COMPARATOR", "default+ign_passable+ground_height+ALLOW_LOWJUMP", 1154);
         set(ConfPaths.COMPATIBILITY_BLOCKS_CHANGETRACKER_ACTIVE, true, 1036); // With lastChangedBuildNumber.
         set(ConfPaths.COMPATIBILITY_BLOCKS_CHANGETRACKER_PISTONS, true, 785);
         set(ConfPaths.COMPATIBILITY_BLOCKS_CHANGETRACKER_MAXAGETICKS, 80, 785);
